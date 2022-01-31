@@ -1,25 +1,12 @@
-# CakePHP 3
+*.sql
+*.sqlite
 
-/vendor/*
-/config/app.php
+application/config/server.inc.php
+application/config/database.php
+application/assets/js/core.js
 
-/tmp/cache/models/*
-!/tmp/cache/models/empty
-/tmp/cache/persistent/*
-!/tmp/cache/persistent/empty
-/tmp/cache/views/*
-!/tmp/cache/views/empty
-/tmp/sessions/*
-!/tmp/sessions/empty
-/tmp/tests/*
-!/tmp/tests/empty
+application/html/core/login/line.php
 
-/logs/*
-!/logs/empty
 
-# CakePHP 2
-
-/app/tmp/*
-/app/Config/core.php
-/app/Config/database.php
-/vendors/*
+#
+#
