@@ -16,9 +16,9 @@ $conn = $db->conn();
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-    <meta name="description" content="RMIS :: Research Management Information System">
-    <meta name="keywords" content="RMIS, HREC, PSU">
-    <meta name="author" content="RMIS :: Research Management Information System">
+    <meta name="description" content="Department of Epidemiology, Faculty of medicine, Prince of Songkla University">
+    <meta name="keywords" content="DOE, MED, PSU, Department of Epidemiology">
+    <meta name="author" content="Department of Epidemiology">
     <title>DOE Account :: Department of Epidemilogy</title>
     <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/ico/favicon.ico">
@@ -115,7 +115,7 @@ $conn = $db->conn();
                                 <!-- right section image -->
                                 <div class="col-md-6 d-md-block d-none text-center align-self-center p-3">
                                     <div >
-                                        <h5 class="f500 text-dark" style="border: dashed; border-width: 0px 0px 0px 0px; border-color: rgb(232, 232, 232); font-weight: 300;"><i class="fa fa-rss"></i> ข่าวประกาศ</h5>
+                                        <h5 class="f500 text-dark" style="border: dashed; border-width: 0px 0px 0px 0px; border-color: rgb(232, 232, 232); font-weight: 300;"><i class="fa fa-rss"></i> Announcement</h5>
                                         <div class="p-2 mt-1 fs08 text-left" style="background: #fff; border-radius: 0px; border: solid; border-width: 0px 0px 0px 3px; border-color: rgb(255, 0, 38); cursor: pointer;" onclick="showModal('NewsModal2')" id="">
                                             ขอความร่วมมือสำหรับโครงการ Multicenter sponsor trial <small class="text-danger">[Click เพื่ออ่าน]</small>
                                         </div>
@@ -136,18 +136,6 @@ $conn = $db->conn();
                                             <div class="f500 text-danger pt-1 mb-0 text-left">
                                                 * การเข้าใช้งานครั้งต่อไป ต้องใช้ e-mail address และ password ดังกล่าวเพื่อเข้าระบบ
                                             </div>
-                                            </p>
-                                        </div>
-
-                                        <div class="p-2 mt-1 pt-1 fs08" style="background: #fff; border-radius: 0px; border: solid; border-width: 0px 0px 0px 3px; border-color: rgb(2, 167, 88);">
-                                            <h6 class="mb-15 text-dark text-left" style=" font-weight: 300;"><span class="f500">สำหรับบุคลากรภายนอกคณะแพทย์</span> ให้ดำเนินการดังนี้เพื่อเริ่มต้นใช้งาน</h6>
-                                            <p class="text-dark" style="color: #000;">
-                                            <ol style="padding-left: 30px; padding-bottom: 10px;"  class="text-dark text-left">
-                                                <li>กดปุ่ม <a href="register">"สมัครใช้งานสำหรับบุคคลภายนอกคณะแพทย์"</a> </li>
-                                                <li>กรอกข้อมูลในแบบฟอร์มลงทะเบียนเพื่อใช้งานระบบ (สำหรับบุคคลภายนอกคณะแพทยศาสตร์) ให้ครบถ้วน และกดปุ่ม "ลงทะเบียน"</li>
-                                                <li>หากลงทะเบียนสำเร็จ ระบบจะส่งอีเมล์ไปยังอีเมลที่ท่านทำการสมัครเพื่อให้กด Link เพื่อยืนยันตัวตนอีกครั้ง</li>
-                                                <li>เมื่อยืนยันตัวตนสำเร็จ ท่านสามารถใช้อีเมล์และรหัสผ่านที่สมัครเข้าสู่ระบบได้</li>
-                                            </ol>
                                             </p>
                                         </div>
 

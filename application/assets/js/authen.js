@@ -1,5 +1,11 @@
 // console.log($('#txtUid').val());
+var line_oa_uid = ''
+var line_oa_token = ''
+
 var authen = {
+    logout(){
+        window.location = '../../../controller/close_session.php'
+    },
     login(){
         var param = {
             username: $('#txtUsername').val(),
@@ -24,6 +30,9 @@ var authen = {
                         }
                    })
     },
+    gotoNext(){
+        window.location = '../../../controller/create_session?uid=' + line_oa_uid + '&token=' + line_oa_token
+    },
     linelink(){
         var param = {
             username: $('#txtUsername').val(),
@@ -46,7 +55,11 @@ var authen = {
                                 confirmButtonClass: 'btn btn-danger',
                             })
                         }else{
-                            window.location = '../../../controller/create_session?uid=' + snap.uid + '&token=' + snap.token
+                            preload.hide()
+                            line_oa_uid = snap.uid
+                            line_oa_token = snap.token
+                            // window.location = '../../../controller/create_session?uid=' + snap.uid + '&token=' + snap.token
+                            $('#modalLineOA').modal({backdrop: 'static', keyboard: false}) 
                         }
                    })
     },

@@ -9,7 +9,7 @@ $conn = $db->conn();
 require('../../../config/admin.php'); 
 require('../../../config/user.php'); 
 
-$page = 'home';
+$page = 'page-user-profile';
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +23,7 @@ $page = 'home';
     <meta name="description" content="DOE Account, Department of Epidemiology, Faculty of Medicine, Prince of Songkla University">
     <meta name="keywords" content="">
     <meta name="author" content="Department of Epidemiology">
-    <title>DOE Account</title>
+    <title>DOE Personal info</title>
     <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@100;300;400&display=swap" rel="stylesheet">
@@ -115,7 +115,7 @@ $page = 'home';
             <div class="content-header row">
                 <div class="content-header-left col-12 mb-2 mt-1">
                     <div class="breadcrumbs-top">
-                        <h5 class="content-header-title float-left pr-1 mb-0 text-white">DOE Account</h5>
+                        <h5 class="content-header-title float-left pr-1 mb-0 text-white">Doe Account</h5>
                         <div class="breadcrumb-wrapper d-none d-sm-block">
                             <ol class="breadcrumb p-0 mb-0 pl-1">
                                 <li class="breadcrumb-item active"><a href="index.php"><i class="bx bx-home-alt"></i></a></li>
@@ -131,37 +131,10 @@ $page = 'home';
                         <div class="col-12">
                             <div class="card bg-transparent shadow-none kb-header-">
                                 <div class="card-body text-center">
-                                    <div>
-                                        <?php 
-                                        if(($currentUser['PHOTO'] != '') && ($currentUser['PHOTO'] != null)){
-                                            if (@getimagesize($currentUser['PHOTO'])) {
-                                                ?>
-                                                <img class="round mb-2" src="<?php echo $currentUser['PHOTO']; ?>" alt="avatar" height="150" width="150">
-                                                <?php
-                                            }else{
-                                                ?>
-                                                <img class="round mb-2" src="../../../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="100" width="100">
-                                                <?php 
-                                            }
-                                        }else{
-                                            ?>
-                                            <img class="round mb-2" src="../../../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="100" width="100">
-                                            <?php
-                                        }
-                                        ?>
-                                        
-                                    </div>
-                                    <h1 class=" mb-2 kb-title">Welcome, <?php echo $currentUser['PREFIX'].$currentUser['FNAME']." ".$currentUser['LNAME']; ?> </h1>
-                                    <p class=" mb-1">
-                                        Manage your info, privacy, and security to make our department work better for you.
+                                    <h1 class=" mb-2 kb-title">Personal info</h1>
+                                    <p class=" mb-0">
+                                    Info about you and your preferences across DOE services
                                     </p>
-                                    <!-- <form>
-                                        <fieldset class="form-group position-relative w-50 mx-auto kb-search-width">
-                                            <input type="text" class="form-control form-control-lg round pl-2" id="searchbar" placeholder="Find from talk..">
-                                            <button class="btn btn-primary round position-absolute d-none d-sm-block" type="button">Search</button>
-                                            <button class="btn btn-primary round position-absolute d-block d-sm-none" type="button"><i class="bx bx-search"></i></button>
-                                        </fieldset>
-                                    </form> -->
                                 </div>
                             </div>
                         </div>
@@ -170,57 +143,95 @@ $page = 'home';
                 <!-- Knowledge base Jumbotron ends -->
                 <!-- Knowledge base start -->
                 <section class="kb-content">
-                    <div class="row kb-search-content-info mx-1 mx-md-2 mx-lg-5">
+                    <div class="row kb-search-content-info mx-1 mx-md-2">
                         <div class="col-12">
-                            <div class="row match-height">
-                                <div class="col-md-4 col-sm-6 kb-search-content">
-                                    <div class="card kb-hover-1">
-                                        <div class="card-body text-center">
-                                            <a href="page-knowledge-categories.html">
-                                                <div class=" mb-1">
-                                                    <i class="livicon-evo" data-options="name: users.svg; size: 50px; strokeColorAlt: #FDAC41; strokeColor: #5A8DEE; style: lines-alt; eventOn: .kb-hover-1;"></i>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4>Basic information</h4>
+                                    <p>Some info may be visible to other people using DOE services.</p>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-4">Photo</div>
+                                        <div class="col-12 col-sm-8"></div>
+                                        <div class="col-12 col-sm-4">Full name</div>
+                                        <div class="col-12 col-sm-8"></div>
+                                        <div class="col-12 col-sm-4">Personnal ID / ID</div>
+                                        <div class="col-12 col-sm-8 text-white"><?php echo $currentUser['PID']; ?></div>
+                                        <div class="col-12 col-sm-4">Position</div>
+                                        <div class="col-12 col-sm-8 text-white"><?php echo $currentUser['POSITION']; ?></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4>Contact information</h4>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-4">E-mail address :</div>
+                                        <div class="col-12 col-sm-8 text-white"><?php echo $currentUser['EMAIL']; ?></div>
+                                        <div class="col-12 col-sm-4">Phone number :</div>
+                                        <div class="col-12 col-sm-8"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4>Security</h4>
+                                            <p>A Secure password to protect your DOE Account</p>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <?php 
+                                                    $pwd = base64_decode($currentUser['PASSWORD']);
+                                                    $pwdlen = strlen($pwd);
+
+                                                    for ($i=0; $i < $pwdlen; $i++) { 
+                                                        echo '<i class="bx bxs-circle" style="font-size: 0.8em; margin-right: 3px;"></i>';
+                                                    }
+                                                    ?>
                                                 </div>
-                                                <h5>My Account</h5>
-                                                <p class=" text-muted">But students more often neglect fact it is much more</p>
-                                            </a>
+                                               
+                                                <div class="col-12 pt-1">
+                                                    Last changed on : 
+                                                    <?php 
+                                                    $strSQL = "SELECT * FROM mym_log WHERE uid = '".$currentUser['UID']."' AND activity = 'Update password' ORDER BY ID DESC LIMIT 1";
+                                                    $res = $db->fetch($strSQL, false, false);
+                                                    if($res){
+                                                        echo date('d M Y, H:i:s', strtotime($res['datetime']));
+                                                    }else{
+                                                        ?>
+                                                        <span class="text-secondary">No data</span>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                </div>
+
+                                                <div class="col-12 text-left" style="padding-top: 20px;">
+                                                    <a href="Javascript:$('#modalPasword').modal()" class="btn btn-outline-success"><i class="bx bx-pencil"></i> Update password</a>
+                                                </div>
+                                                
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-6 kb-search-content">
-                                    <?php 
-                                    if($currentUser['LINELOGIN'] == null){
-                                        ?>
-                                        <div class="card kb-hover-2" style="cursor: pointer;">
-                                            <div class="card-body text-center">
-                                                <a href="../login/line">
-                                                    <div class=" mb-1">
-                                                        <i class="livicon-evo" data-options="name: diagram.svg; size: 50px; strokeColorAlt: #FDAC41; strokeColor: #5A8DEE; style: lines-alt; eventOn: .kb-hover-2;"></i>
-                                                    </div>
-                                                    <h5>Link with line</h5>
-                                                    <p class=" text-muted">Connect your account with your line account to get news, notification, etc.</p>
-                                                </a>
+                                <div class="col-12 col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4>Applications and services</h4>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-4">E-mail address</div>
+                                                <div class="col-12 col-sm-8"></div>
+                                                <div class="col-12 col-sm-4">Phone number</div>
+                                                <div class="col-12 col-sm-8"></div>
+                                                <div class="col-12 col-sm-4">Personnal ID / ID</div>
+                                                <div class="col-12 col-sm-8"></div>
+                                                <div class="col-12 col-sm-4">Position</div>
+                                                <div class="col-12 col-sm-8"></div>
                                             </div>
                                         </div>
-                                        <?php
-                                    }else{
-                                        ?>
-                                        <div class="card kb-hover-2">
-                                            <div class="card-body text-center">
-                                                <a href="Javascript:void(0)">
-                                                    <div class=" mb-1">
-                                                        <i class="livicon-evo" data-options="name: diagram.svg; size: 50px; strokeColorAlt: #FDAC41; strokeColor: #5A8DEE; style: lines-alt; eventOn: .kb-hover-2;"></i>
-                                                    </div>
-                                                    <h5 class=""><i class="bx bxs-check-shield text-success" style="font-size: 1.5em;"></i> Line connected</h5>
-                                                    <p class=" text-muted">Your line account connected.</p>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <?php
-                                    }
-                                    ?>
-                                    
+                                    </div>
                                 </div>
-                                
                             </div>
                         </div>
                     </div>
@@ -238,6 +249,31 @@ $page = 'home';
     <?php 
     require('./comp/footer.php');
     ?>
+
+    <div id="modalPasword" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body pb-2">
+                    <h3 class="text-white text-left pt-2">Update password</h3>
+                    <div class="form-group pt-2">
+                        <input type="password" class="form-control" placeholder="Old password ...">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="New password ...">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" placeholder="Re-enter new password ...">
+                    </div>
+                    <div class="text-right pt-1 pb-2">
+                        <button class="btn btn-success btn-block btn-lg" data-dismiss="modal" onclick="authen.gotoNext()">Update success</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 
 
     <!-- BEGIN: Vendor JS-->

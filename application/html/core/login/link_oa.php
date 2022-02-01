@@ -139,24 +139,26 @@ $photo = mysqli_real_escape_string($conn, $_REQUEST['photo']);
     <!-- END: Content-->
 
     <!-- sample modal content -->
-    <div id="modalLineOA" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="NewsModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-body pb-2">
-                    <h1 class="text-success text-center pt-2">Step 2</h1>
-                    <h3 class="text-dark text-center">Add line OA to get notification</h3>
-                    <p>
-                    <div class="text-center pb-20">
-                        <img src="../../../img/M_gainfriends_qr.png" alt="" class="img-fluid">
-                        <p>
-                            Scan this QR Code then click button below after added.
-                        </p>
-                    </div>
-                    <div class="text-right pt-2">
-                        <button class="btn btn-success btn-block btn-lg round" data-dismiss="modal" onclick="authen.gotoNext()">Add success</button>
-                    </div>
-                    </p>
+            <!-- <div class="modal-header" style="background: rgb(255, 0, 61);">
+                <h5 class="modal-title text-white" id="exampleModalLabel" style="font-weight: 400;">ประกาศ</h5>
+            </div> -->
+            <div class="modal-body pb-2">
+                <p>
+                <div class="text-center pb-20">
+                    <i class="fas fa-exclamation-triangle text-danger fa-5x"></i>
                 </div>
+                <h4 class="text-center text-danger">ขอความร่วมมือ</h4>
+                <p class="text-center">
+                    โครงการวิจัยที่เป็น Multicenter Sponsor Trial ขอให้ยื่นโครงการเพื่อขอรับรองที่ CREC กรณีมีข้อสงสัยให้โทรสอบถามเจ้าหน้าที่สำนักงานหน่วยส่งเสริมและพัฒนาทางวิชาการ (1149, 1157)
+                </p>
+                <div class="text-right pt-10">
+                    <button class="btn btn-secondary btn-block" data-dismiss="modal">ปิด</button>
+                </div>
+                </p>
+            </div>
             </div>
             <!-- /.modal-content -->
         </div>
@@ -191,8 +193,6 @@ $photo = mysqli_real_escape_string($conn, $_REQUEST['photo']);
 
     <script>
         preload.hide()
-
-        // $('#modalLineOA').modal()
 
         function showModal(id){
             $("#" + id).modal();

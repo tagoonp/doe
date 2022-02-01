@@ -40,6 +40,10 @@ if($res){
             ";
     $resInsertToken = $db->insert($strSQL, false);
 
+    $_SESSION['doe_uid'] = $uid;
+    $_SESSION['doe_token'] = $access_token;
+    $_SESSION['doe_id'] = session_id();
+
     header('Location: '.ROOT_DOMAIN.'html/core/'.$res['ROLE'].'/');
     mysqli_close($conn);
     die();

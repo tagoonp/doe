@@ -8,7 +8,7 @@
                 </li>
                 
                 <li class=" navigation-header text-truncate"><span data-i18n="Apps">Your account</span></li>
-                <li class=" nav-item"><a href="page-user-profile.html"><i class="menu-livicon" data-icon="user"></i><span class="menu-title text-truncate" data-i18n="User Profile">User Profile</span></a></li>
+                <li class=" nav-item <?php if($page == 'page-user-profile'){ echo "active"; }?>"><a href="page-user-profile"><i class="menu-livicon" data-icon="user"></i><span class="menu-title text-truncate" data-i18n="User Profile">User Profile</span></a></li>
 
                 <?php 
                 if($role == 'admin'){
