@@ -1,8 +1,8 @@
 <?php 
 
 if(!isset($_SESSION['doe_uid'])){
-    echo "error 1";
-    // header('Location: '.ROOT_DOMAIN);
+    // echo "error 1";
+    header('Location: '.ROOT_DOMAIN);
     die();
 }
 
@@ -17,8 +17,8 @@ if($resUser){
     $currentUser = $resUser;
 }else{
     session_destroy();
-    echo "error 2";
-    die();
+    // echo "error 2";
+    // die();
     header('Location: '.ROOT_DOMAIN);
     die();
 }

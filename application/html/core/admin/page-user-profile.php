@@ -151,13 +151,45 @@ $page = 'page-user-profile';
                                     <p>Some info may be visible to other people using DOE services.</p>
                                     <div class="row">
                                         <div class="col-12 col-sm-4">Photo</div>
-                                        <div class="col-12 col-sm-8"></div>
+                                        <div class="col-12 col-sm-8">
+                                            <?php 
+                                            if(($currentUser['PHOTO'] != '') && ($currentUser['PHOTO'] != null)){
+                                                if (@getimagesize($currentUser['PHOTO'])) {
+                                                    ?>
+                                                    <img class="round mb-1" src="<?php echo $currentUser['PHOTO']; ?>" alt="avatar" height="60" width="60">
+                                                    <?php
+                                                }else{
+                                                    ?>
+                                                    <img class="round mb-1" src="../../../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="60" width="60">
+                                                    <?php 
+                                                }
+                                            }else{
+                                                ?>
+                                                <img class="round mb-1" src="../../../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="60" width="60">
+                                                <?php
+                                            }
+                                            ?>
+                                            <div class="pt-0 pb-2">
+                                                <button class="btn btn-icon pl-1 pr-1 btn-outline-secondary btn-sm"><i class="bx bx-camera"></i></button>
+                                            </div>
+                                        </div>
                                         <div class="col-12 col-sm-4">Full name</div>
-                                        <div class="col-12 col-sm-8"></div>
+                                        <div class="col-12 col-sm-8 text-white"><?php echo $currentUser['PREFIX'].$currentUser['FNAME']." ".$currentUser['LNAME']; ?></div>
                                         <div class="col-12 col-sm-4">Personnal ID / ID</div>
                                         <div class="col-12 col-sm-8 text-white"><?php echo $currentUser['PID']; ?></div>
                                         <div class="col-12 col-sm-4">Position</div>
-                                        <div class="col-12 col-sm-8 text-white"><?php echo $currentUser['POSITION']; ?></div>
+                                        <div class="col-12 col-sm-8 text-white">
+                                            <?php 
+                                            if(($currentUser['POSITION'] == null) || ($currentUser['POSITION'] == '')){
+                                                echo "-";
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="col-12 col-sm-8 offset-sm-4">
+                                            <div class="pt-1 pb-2">
+                                                <button class="btn btn-icon- btn-outline-secondary btn-sm- pl-1 pr-2" style="padding-bottom: 8px;"><i class="bx bx-pencil"></i> Update basic info</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

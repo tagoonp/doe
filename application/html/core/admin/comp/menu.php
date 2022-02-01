@@ -22,15 +22,16 @@
                             </li>
                         </ul>
                     </li>
+                    <li class=" nav-item"><a href="app-api"><i class="menu-livicon" data-icon="gears"></i><span class="menu-title text-truncate" data-i18n="Calendar">API</span></a>
                     <?php
                 }
                 ?>
                 
 
                 <li class=" navigation-header text-truncate"><span data-i18n="Apps">App</span></li>
-                <li class=" nav-item"><a href="https://medipe2.psu.ac.th/app/wfh"><i class="menu-livicon" data-icon="calendar"></i><span class="menu-title text-truncate" data-i18n="Calendar">DOE-WFH</span></a>
-                <li class=" nav-item"><a href="https://medipe2.psu.ac.th/app/personal"><i class="menu-livicon" data-icon="users"></i><span class="menu-title text-truncate" data-i18n="Calendar">DOE Personnal</span></a>
-                <li class=" nav-item"><a href="https://medipe2.psu.ac.th/app/sis"><i class="menu-livicon" data-icon="notebook"></i><span class="menu-title text-truncate" data-i18n="Calendar">DOE-SIS</span></a>
+                <li class=" nav-item"><a href="https://medipe2.app/wfh"><i class="menu-livicon" data-icon="calendar"></i><span class="menu-title text-truncate" data-i18n="Calendar">DOE-WFH</span></a>
+                <li class=" nav-item"><a href="https://medipe2.app/personal"><i class="menu-livicon" data-icon="users"></i><span class="menu-title text-truncate" data-i18n="Calendar">DOE Personnal</span></a>
+                <li class=" nav-item"><a href="https://medipe2.app/sis"><i class="menu-livicon" data-icon="notebook"></i><span class="menu-title text-truncate" data-i18n="Calendar">DOE-SIS</span></a>
                 </li>
                 
 
