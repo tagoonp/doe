@@ -19,6 +19,49 @@ if(!isset($_REQUEST['stage'])){
 
 $stage = mysqli_real_escape_string($conn, $_REQUEST['stage']);
 
+if($stage == 'update_user_info'){
+    if(
+        (!isset($_REQUEST['role'])) ||
+        (!isset($_REQUEST['uid'])) ||
+        (!isset($_REQUEST['target_uid']))
+      ){
+        $return['status'] = 'Fail';
+        $return['error_message'] = 'Error x1001';
+        echo json_encode($return);
+        mysqli_close($conn);
+        die();
+    }
+    $uid = mysqli_real_escape_string($conn, $_POST['uid']);
+    $role = mysqli_real_escape_string($conn, $_POST['role']);
+    $target_uid = mysqli_real_escape_string($conn, $_POST['target_uid']);
+
+    $prefix = mysqli_real_escape_string($conn, $_POST['prefix']);
+    $fname = mysqli_real_escape_string($conn, $_POST['fname']);
+    $mname = mysqli_real_escape_string($conn, $_POST['mname']);
+    $lname = mysqli_real_escape_string($conn, $_POST['lname']);
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $targe_role = mysqli_real_escape_string($conn, $_POST['targe_role']);
+    $position = mysqli_real_escape_string($conn, $_POST['position']);
+
+    $strSQL = "UPDATE mym_useraccount 
+               SET 
+               USERNAME = '$username', 
+               PREFIX = '$prefix', 
+               FNAME = '$fname', 
+               MNAME = '$mname', 
+               LNAME = '$lname', 
+               POSITION = '$position', 
+               PID = '$username'
+               WHERE UID = '$target_uid' 
+               ";
+    $db->execute($strSQL);
+    $return['status'] = 'Success';
+
+    echo json_encode($return);
+    mysqli_close($conn);
+    die();
+}
+
 if($stage == 'remove_sis_role'){
     if(
         (!isset($_REQUEST['role'])) ||
