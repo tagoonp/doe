@@ -120,7 +120,7 @@ if($stage == 'login'){
 
         $return['status'] = 'Success';
         $return['token'] = $access_token;
-        $return['date'] = $res;
+        $return['data'] = $res;
         $return['uid'] = $uid;
 
     }else{

@@ -22,7 +22,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class=" nav-item"><a href="app-api"><i class="menu-livicon" data-icon="gears"></i><span class="menu-title text-truncate" data-i18n="Calendar">API</span></a>
+                    <li class=" nav-item <?php if($page == 'app-api'){ echo "active"; }?>"><a href="app-api"><i class="menu-livicon" data-icon="gears"></i><span class="menu-title text-truncate" data-i18n="Calendar">API</span></a>
                     <?php
                 }
                 ?>

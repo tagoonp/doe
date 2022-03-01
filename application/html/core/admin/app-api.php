@@ -47,6 +47,8 @@ $page = 'app-api';
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/page-knowledge-base.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/extensions/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/preload.js/dist/css/preload.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -140,137 +142,94 @@ $page = 'app-api';
                                 <form class="credentialForm" onsubmit="return false;">
                                     <div class="form-group">
                                         <label for="">App name : </label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" id="txtAppname">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Callback URL : </label>
+                                        <input type="text" class="form-control" id="txtCallback">
                                     </div>
                                     <div class="form-group">
                                         <label for="">E-mail address : </label>
-                                        <input type="email" class="form-control">
+                                        <input type="email" class="form-control" id="txtEmail">
+                                    </div>
+                                    <div class="form-group text-right">
+                                        <button class="btn btn-outline-success" type="submit">Create</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-sm-7"></div>
-                </div>
-                
-                <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">
-                                    DOE users account
-                                    </h4>
-                                </div>
-                                <div class="card-body card-dashboard">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped dataex-html5-selectors">
-                                            <thead>
-                                                <tr>
-                                                    <th>#</th>
-                                                    <th>Image</th>
-                                                    <th class="pl-0">Name</th>
-                                                    <th>Position</th>
-                                                    <th>ROLE</th>
-                                                    <th>LINE</th>
-                                                    <th>ACTIVE</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php 
-                                                $strSQL = "SELECT * FROM mym_useraccount WHERE DELETE_STATUS = 'N' ORDER BY FNAME";
-                                                $resList = $db->fetch($strSQL, true, false);
-                                                if(($resList) && ($resList['status'])){
-                                                    $c = 1;
-                                                    foreach ($resList['data'] as $row) {
-                                                        ?>
-                                                        <tr>
-                                                            <td style="vertical-align: top;"><?php echo $c; ?></td>
-                                                            <td style="vertical-align: top;">
-                                                            <?php 
-                                                            if(($row['PHOTO'] != '') && ($row['PHOTO'] != null)){
-                                                                if (@getimagesize($row['PHOTO'])) {
-                                                                    ?>
-                                                                    <img class="round" src="<?php echo $row['PHOTO']; ?>" alt="avatar" height="40" width="40">
-                                                                    <?php
-                                                                }else{
-                                                                    echo "-";
-                                                                }
-                                                            }else{
-                                                                echo "-";
-                                                            }
-                                                            ?>
-                                                            </td>
-                                                            <td style="vertical-align: top;" class="pl-0">
-                                                                <div class="pb-0">
-                                                                    <span class="text-success">ID : <?php echo $row['PID']; ?></span>
-                                                                </div>
-                                                                <div style="font-size: 1.2em;" class="text-white"><?php echo $row['PREFIX'].$row['FNAME']." ".$row['LNAME']; ?></div>
-                                                                <div style="font-size: 1em;" class="text-muted">E-mail : <?php echo $row['EMAIL']; ?></div>
-                                                                <div class="pt-1">
-                                                                    <button class="btn btn-light-secondary btn-icon"><i class="bx bx-wrench"></i></button>
-                                                                    <button class="btn btn-light-secondary btn-icon"><i class="bx bx-list-ul"></i></button>
-                                                                    <?php 
-                                                                    if($row['LINELOGIN'] != null){
-                                                                        ?>
-                                                                        <button class="btn btn-light-secondary btn-icon" onclick="window.location='app-line-message?toid=<?php echo $row['UID'];?>&totoken=<?php echo $row['LINELOGIN']?>'"><i class="bx bx-paper-plane"></i></button>
-                                                                        <?php
-                                                                    }else{
-                                                                        ?>
-                                                                        <button class="btn btn-light-secondary btn-icon" disabled><i class="bx bx-paper-plane"></i></button>
-                                                                        <?php
-                                                                    }
-                                                                    ?>
-                                                                    
-                                                                    
-                                                                    <button class="btn btn-danger btn-icon"><i class="bx bx-trash"></i></button>
-                                                                </div>
-                                                            </td>
-                                                            <td style="vertical-align: top;"><?php echo $row['POSITION']; ?></td>
-                                                            <td style="vertical-align: top;"><?php 
-                                                            if($row['ROLE'] == 'admin'){
-                                                                ?>
-                                                                <span class="badge badge-danger round">Admin</span>
-                                                                <?php
-                                                            }else if($row['ROLE'] == 'staff'){
-                                                                ?>
-                                                                <span class="badge badge-warning round">Staff</span>
-                                                                <?php
-                                                            }else {
-                                                                ?>
-                                                                <span class="badge badge-success round">Common</span>
-                                                                <?php
-                                                            }
-                                                            ?></td>
-                                                            <td style="vertical-align: top;">
+                    <div class="col-12 col-sm-7">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">
+                                Credential list
+                                </h4>
+                            </div>
+                            <div class="card-body card-dashboard">
+                                <div class="table-responsive">
+                                    <table class="table table-striped dataex-html5-selectors">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>App name</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php 
+                                            $strSQL = "SELECT * FROM mym_credential WHERE 1 ORDER BY cre_cdatetime";
+                                            $resList = $db->fetch($strSQL, true, false);
+                                            if(($resList) && ($resList['status'])){
+                                                $c = 1;
+                                                foreach ($resList['data'] as $row) {
+                                                    ?>
+                                                    <tr>
+                                                        <td style="vertical-align: top;"><?php echo $c; ?></td>
+                                                        <td style="vertical-align: top;">
+                                                            <div class="text-success">
                                                                 <?php 
-                                                                if($row['LINELOGIN'] != null){
-                                                                    ?>
-                                                                    <i class="bx bx-link text-success" style="font-size: 2em; "></i>
-                                                                    <?php
-                                                                }else{
-                                                                    echo "-";
-                                                                }
+                                                                echo $row['cre_app'];
                                                                 ?>
-                                                            </td>
-                                                            <td style="vertical-align: top;">
-                                                                <div class="custom-control custom-switch custom-switch-success mr-2 mb-1">
-                                                                    <input type="checkbox" class="custom-control-input" id="customSwitchcolor2"
-                                                                    <?php 
-                                                                    if($row['ACTIVE_STATUS'] == 'Y'){ echo "checked"; }
-                                                                    ?>
-                                                                    >
-                                                                    <label class="custom-control-label" for="customSwitchcolor2"></label>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <?php
-                                                        $c++;
-                                                    }
+                                                            </div>
+                                                            <div class="text-muted">Callback : 
+                                                                <span class="text-white"><?php 
+                                                                echo $row['cre_callback'];
+                                                                ?></span>
+                                                            </div>
+                                                            <div class="text-muted">API KEY : 
+                                                                <span class="text-white"><?php 
+                                                                echo $row['cre_api'];
+                                                                ?></span>
+                                                            </div>
+                                                        </td>
+                                                        
+                                                        
+                                                        <td style="vertical-align: top;">
+                                                            <div class="custom-control custom-switch custom-switch-success mr-2 mb-1">
+                                                                <input type="checkbox" class="custom-control-input" id="customSwitchcolor2"
+                                                                <?php 
+                                                                if($row['cre_status'] == '1'){ echo "checked"; }
+                                                                ?>
+                                                                >
+                                                                <label class="custom-control-label" for="customSwitchcolor2"></label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <?php
+                                                    $c++;
                                                 }
-                                                ?>
-                                                
-                                        </table>
-                                    </div>
+                                            }
+                                            ?>
+                                            
+                                    </table>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
 
             </div>
         </div>
@@ -309,34 +268,71 @@ $page = 'app-api';
     <script src="../../../app-assets/js/core/app.js"></script>
     <script src="../../../app-assets/js/scripts/components.js"></script>
     <script src="../../../app-assets/js/scripts/footer.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/sweetalert2.all.min.js"></script>
+    <script src="../../../app-assets/vendors/preload.js/dist/js/preload.js"></script>
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
     <script src="../../../app-assets/js/scripts/pages/page-knowledge-base.js"></script>
+    <script src="../../../assets/js/core.js?v=<?php echo filemtime('../../../assets/js/core.js'); ?>"></script>
+    <script src="../../../assets/js/authen.js?v=<?php echo filemtime('../../../assets/js/authen.js'); ?>"></script>
     <!-- END: Page JS-->
     <script>
         $(document).ready(function(){
+            preload.hide()
             $('.dataex-html5-selectors').DataTable( {
-                dom: 'Bfrtip',
+                
                 "columnDefs": [
                     { "width": "50px", "targets": 0 }
-                ],
-                buttons: [
-                    {
-                        extend: 'pdfHtml5',
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
-                    {
-                        extend: 'print',
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    }
                 ]
             });
 
+
+            $('.credentialForm').submit(function(){
+                $check = 0;
+                $('.form-control').removeClass('is-invalid')
+                if($('#txtAppname').val() == ''){
+                    $check++;
+                    $('#txtAppname').addClass('is-invalid')
+                }
+
+                if($('#txtEmail').val() == ''){
+                    $check++;
+                    $('#txtEmail').addClass('is-invalid')
+                }
+
+                if($('#txtCallback').val() == ''){
+                    $check++;
+                    $('#txtCallback').addClass('is-invalid')
+                }
+
+                if($check != 0){ return ;}
+
+                preload.show()
+
+                var param = {
+                    appname: $('#txtAppname').val(),
+                    email: $('#txtEmail').val(),
+                    callback: $('#txtCallback').val()
+                }
+
+                var jxr = $.post(api + 'credential?stage=create', param, function(){}, 'json')
+                        .always(function(snap){
+                            console.log(snap);
+                                if(snap.status == 'Fail'){
+                                    preload.hide()
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: 'Error',
+                                        text: "Can not create API key",
+                                        confirmButtonText: 'Retry',
+                                        confirmButtonClass: 'btn btn-danger',
+                                    })
+                                }else{
+                                    window.location.reload()
+                                }
+                    })
+                })
         })
     </script>
 </body>

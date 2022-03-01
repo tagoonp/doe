@@ -62,11 +62,11 @@ $conn = $db->conn();
             <div class="content-body">
                 <!-- login page start -->
                 <section id="auth-login" class="row flexbox-container">
-                    <div class="col-xl-8 col-11">
+                    <div class="col-xl-7 col-11">
                         <div class="card bg-authentication mb-0">
                             <div class="row m-0">
                                 <!-- left section-login -->
-                                <div class="col-md-6 col-12 px-0">
+                                <div class="col-5 px-0">
                                     <div class="card disable-rounded-right mb-0 p-2 h-100 d-flex justify-content-center">
                                         <div class="card-header pb-1">
                                             <div class="card-title">
@@ -113,34 +113,6 @@ $conn = $db->conn();
                                     </div>
                                 </div>
                                 <!-- right section image -->
-                                <div class="col-md-6 d-md-block d-none text-center align-self-center p-3">
-                                    <div >
-                                        <h5 class="f500 text-dark" style="border: dashed; border-width: 0px 0px 0px 0px; border-color: rgb(232, 232, 232); font-weight: 300;"><i class="fa fa-rss"></i> Announcement</h5>
-                                        <div class="p-2 mt-1 fs08 text-left" style="background: #fff; border-radius: 0px; border: solid; border-width: 0px 0px 0px 3px; border-color: rgb(255, 0, 38); cursor: pointer;" onclick="showModal('NewsModal2')" id="">
-                                            ขอความร่วมมือสำหรับโครงการ Multicenter sponsor trial <small class="text-danger">[Click เพื่ออ่าน]</small>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="mt-1">
-                                        <div class="pl-2 pr-2 mt-10 pt-1 pb-1 fs08 text-dark" style="background: #fff; border-radius: 0px; border: solid; border-width: 0px 0px 0px 3px; border-color: rgb(2, 167, 88);">
-                                            <h6 class="mb-15 text-danger" style=" font-weight: 300;"><span class="f500">** เฉพาะบุคลากรคณะแพทย์ **</span> (การเข้าระบบครั้งแรก)</h6>
-                                            <p class="txt-dark text-left" style="color: #000;">
-                                            <ol style="padding-left: 30px; padding-bottom: 0px;"  class="text-dark text-left">
-                                                <li>Username = รหัสบุคลากร </li>
-                                                <li>Password = วันเกิด ใช้ปี คศ. (dd/mm/yyyy) เช่น 07/08/1982 </li>
-                                            </ol>
-                                            <div class="f500 text-dark pt-0 mb-0 text-left">
-                                                ระบบจะเข้าสู่หน้าข้อมูลส่วนตัว ให้ท่านทำการตรวจสอบข้อมูลและแก้ไขให้ถูกต้อง บันทึกชื่อ e-mail ที่จะใช้เป็น username  และกำหนด password ใหม่ กดปุ่มบันทึก
-                                            </div>
-                                            <div class="f500 text-danger pt-1 mb-0 text-left">
-                                                * การเข้าใช้งานครั้งต่อไป ต้องใช้ e-mail address และ password ดังกล่าวเพื่อเข้าระบบ
-                                            </div>
-                                            </p>
-                                        </div>
-
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

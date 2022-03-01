@@ -47,6 +47,8 @@ $page = 'app-user-list';
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/page-knowledge-base.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/extensions/sweetalert2.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/preload.js/dist/css/preload.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -132,8 +134,16 @@ $page = 'app-user-list';
             <div class="content-body">
                 <!-- Knowledge base Jumbotron start -->
                 
-                
-                <div class="card">
+                            <?php 
+                            $strSQL = "SELECT * FROM mym_system WHERE sys_status = '1'";
+                            $resSys = $db->fetch($strSQL, true, true);
+                            $sys = false;
+                            if(($resSys) && ($resSys['status'])){
+                                $sys = true;
+                            }
+
+                            ?>
+                            <div class="card">
                                 <div class="card-header">
                                     <h4 class="card-title">
                                     DOE users account
@@ -150,12 +160,24 @@ $page = 'app-user-list';
                                                     <th>Position</th>
                                                     <th>ROLE</th>
                                                     <th>LINE</th>
-                                                    <th>ACTIVE</th>
+                                                    <th>Account ACTIVE</th>
+                                                    <?php 
+                                                    if($sys){
+                                                        foreach ($resSys['data'] as $rowSys) {
+                                                            ?>
+                                                            <th><?php echo $rowSys['sys_name_short']; ?></th>
+                                                            <?php
+                                                        }
+                                                    }
+                                                    ?>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php 
-                                                $strSQL = "SELECT * FROM mym_useraccount WHERE DELETE_STATUS = 'N' ORDER BY FNAME";
+                                                $strSQL = "SELECT * FROM mym_useraccount a 
+                                                           WHERE 
+                                                           a.DELETE_STATUS = 'N' 
+                                                           ORDER BY a.FNAME";
                                                 $resList = $db->fetch($strSQL, true, false);
                                                 if(($resList) && ($resList['status'])){
                                                     $c = 1;
@@ -232,14 +254,52 @@ $page = 'app-user-list';
                                                             </td>
                                                             <td style="vertical-align: top;">
                                                                 <div class="custom-control custom-switch custom-switch-success mr-2 mb-1">
-                                                                    <input type="checkbox" class="custom-control-input" id="customSwitchcolor2"
+                                                                    <input type="checkbox" class="custom-control-input" id="customSwitchcolor_<?php echo $row['ID'];?>" onclick="toggleActiveApplication('ACTIVE_STATUS', '<?php echo $row['UID']; ?>', '<?php echo $row['ACTIVE_STATUS']; ?>')"
                                                                     <?php 
                                                                     if($row['ACTIVE_STATUS'] == 'Y'){ echo "checked"; }
                                                                     ?>
                                                                     >
-                                                                    <label class="custom-control-label" for="customSwitchcolor2"></label>
+                                                                    <label class="custom-control-label" for="customSwitchcolor_<?php echo $row['ID'];?>"></label>
                                                                 </div>
                                                             </td>
+                                                            <?php 
+                                                            if($sys){
+                                                                foreach ($resSys['data'] as $rowSys) {
+                                                                    ?>
+                                                                    <td style="vertical-align: top;">
+                                                                        <div class="custom-control custom-switch custom-switch-success mr-2 mb-1">
+                                                                            <input type="checkbox" class="custom-control-input" id="customSwitchcolor_<?php echo $rowSys['sys_id'];?>_<?php echo $row['ID'];?>"
+                                                                            <?php 
+                                                                            if(($rowSys['sys_name_short'] == 'SIS') && ($row['SIS'] == '1')){ 
+                                                                                echo "checked "; 
+                                                                                ?>
+                                                                                onclick="toggleActiveApplication('SIS', '<?php echo $row['UID']; ?>', '<?php echo $row['SIS']; ?>')"
+                                                                                <?php
+                                                                            }else if(($rowSys['sys_name_short'] == 'SIS') && ($row['SIS'] == '0')){
+                                                                                ?>
+                                                                                onclick="toggleActiveApplication('SIS', '<?php echo $row['UID']; ?>', '<?php echo $row['SIS']; ?>')"
+                                                                                <?php
+                                                                            }
+
+                                                                            if(($rowSys['sys_name_short'] == 'WFH') && ($row['WFH'] == '1')){ 
+                                                                                echo "checked "; 
+                                                                                ?>
+                                                                                onclick="toggleActiveApplication('WFH', '<?php echo $row['UID']; ?>', '<?php echo $row['WFH']; ?>')"
+                                                                                <?php
+                                                                            }else if(($rowSys['sys_name_short'] == 'WFH') && ($row['WFH'] == '0')){
+                                                                                ?>
+                                                                                onclick="toggleActiveApplication('WFH', '<?php echo $row['UID']; ?>', '<?php echo $row['WFH']; ?>')"
+                                                                                <?php
+                                                                            }
+                                                                            ?>
+                                                                            >
+                                                                            <label class="custom-control-label" for="customSwitchcolor_<?php echo $rowSys['sys_id'];?>_<?php echo $row['ID'];?>"></label>
+                                                                        </div>    
+                                                                    </td>
+                                                                    <?php
+                                                                }
+                                                            }
+                                                            ?>
                                                         </tr>
                                                         <?php
                                                         $c++;
@@ -281,6 +341,8 @@ $page = 'app-user-list';
     <script src="../../../app-assets/vendors/js/tables/datatable/buttons.bootstrap4.min.js"></script>
     <script src="../../../app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
     <script src="../../../app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+    <script src="../../../app-assets/vendors/js/extensions/sweetalert2.all.min.js"></script>
+    <script src="../../../app-assets/vendors/preload.js/dist/js/preload.js"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -292,7 +354,9 @@ $page = 'app-user-list';
     <!-- END: Theme JS-->
 
     <!-- BEGIN: Page JS-->
-    <script src="../../../app-assets/js/scripts/pages/page-knowledge-base.js"></script>
+    <script src="../../../assets/js/core.js?v=<?php echo filemtime('../../../assets/js/core.js'); ?>"></script>
+    <script src="../../../assets/js/authen.js?v=<?php echo filemtime('../../../assets/js/authen.js'); ?>"></script>
+    <script src="../../../assets/js/user.js?v=<?php echo filemtime('../../../assets/js/user.js'); ?>"></script>
     <!-- END: Page JS-->
     <script>
         $(document).ready(function(){
@@ -317,7 +381,10 @@ $page = 'app-user-list';
                 ]
             });
 
+            preload.hide()
         })
+
+        
     </script>
 </body>
 <!-- END: Body-->
