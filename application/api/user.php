@@ -19,6 +19,68 @@ if(!isset($_REQUEST['stage'])){
 
 $stage = mysqli_real_escape_string($conn, $_REQUEST['stage']);
 
+if($stage == 'check_available_sis'){
+    if(
+        (!isset($_REQUEST['role'])) ||
+        (!isset($_REQUEST['uid'])) ||
+        (!isset($_REQUEST['username'])) ||
+        (!isset($_REQUEST['email']))
+      ){
+        $return['status'] = 'Fail';
+        $return['error_message'] = 'Error x1001';
+        echo json_encode($return);
+        mysqli_close($conn);
+        die();
+    }
+    $uid = mysqli_real_escape_string($conn, $_POST['uid']);
+    $role = mysqli_real_escape_string($conn, $_POST['role']);
+    
+
+    $prefix = mysqli_real_escape_string($conn, $_POST['prefix']);
+    $fname = mysqli_real_escape_string($conn, $_POST['fname']);
+    $mname = mysqli_real_escape_string($conn, $_POST['mname']);
+    $lname = mysqli_real_escape_string($conn, $_POST['lname']);
+    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $targe_role = mysqli_real_escape_string($conn, $_POST['targe_role']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $password = base64_encode($password);
+
+    $strSQL = "SELECT * FROM mym_useraccount WHERE (EMAIL = '$email' OR USERNAME = '$username') AND DELETE_STATUS = 'N'";
+    $res = $db->fetch($strSQL, true, true);
+    if(($res) && ($res['count'] > 0)){
+        $return['status'] = 'Fail';
+    }else{
+        $target_uid = base64_encode(generateRandomString(8).date('Y'));
+
+        $return['uid'] = $target_uid;
+
+        $strSQL = "INSERT INTO mym_useraccount 
+                  (
+                    `UID`, `USERNAME`, `PREFIX`, `FNAME`, `MNAME`, 
+                    `LNAME`, `PID`, `EMAIL`, `PASSWORD`, `ACTIVE_STATUS`, 
+                    `DELETE_STATUS`, `UDATETIME`, `ROLE`, `SIS`
+                  )
+                  VALUES
+                  (
+                    '$target_uid', '$username', '$prefix', '$fname', '$mname', 
+                    '$lname', '$username', '$email', '$password', 'Y', 
+                    'N', '$datetime', 'common', '1'
+                  )
+                  ";
+        $resInsert = $db->insert($strSQL, false);
+        if($resInsert){
+            $return['status'] = 'Available';
+        }else{
+            $return['status'] = 'Fail';
+            $return['message'] = $strSQL;
+        }
+    }
+    echo json_encode($return);
+    mysqli_close($conn);
+    die();
+}
+
 if($stage == 'update_user_info'){
     if(
         (!isset($_REQUEST['role'])) ||
